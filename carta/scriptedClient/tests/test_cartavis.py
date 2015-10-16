@@ -1,4 +1,5 @@
 import os
+import time
 import pytest
 import cartavis
 from flaky import flaky
@@ -284,7 +285,7 @@ def test_saveHistogram(cartavisInstance, tempImageDir, cleanSlate):
     comparison = Image.open(tempImageDir + '/' + imageName)
     assert list(reference.getdata()) == list(comparison.getdata())
 
-@pytest.mark.skipif(True, reason="The histogram does not currently\
+@pytest.mark.xfail(True, reason="The histogram does not currently\
                     update properly.")
 def test_setBinCount(cartavisInstance, tempImageDir, cleanSlate):
     """
@@ -580,7 +581,6 @@ def test_getPluginList(cartavisInstance, cleanSlate):
     assert sorted(plugins) == ['Animator', 'CasaImageLoader', 'Colormap',
                               'Hidden', u'Histogram']
 
-@pytest.mark.skipif(True, reason="Seems to be causing problems currently.")
 def test_getChannelIndex(cartavisInstance, cleanSlate):
     """
     Test that the channel index can be obtained from the animator.
@@ -714,3 +714,4 @@ def _loadFilesFromDirectory(imageView, directory):
     """
     for fileName in os.listdir(directory):
         assert imageView.loadFile(directory + '/' + fileName) == ['']
+        time.sleep(1)
