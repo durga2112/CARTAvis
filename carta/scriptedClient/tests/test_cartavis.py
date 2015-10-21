@@ -604,9 +604,9 @@ def test_saveHistogramConsistency(cartavisInstance, cleanSlate, tempImageDir):
     file1 = tempImageDir + '/' + 'hist1.png'
     file2 = tempImageDir + '/' + 'hist2.png'
     i[0].loadFile(os.getcwd() + '/data/mexinputtest.fits')
-    h[0].saveHistogram(file1, 200, 200)
+    h[0].saveHistogram(file1, 200, 200, 'ignore')
     cartavisInstance.setCustomLayout(3,3)
-    h[0].saveHistogram(file2, 200, 200)
+    h[0].saveHistogram(file2, 200, 200, 'ignore')
     image1 = Image.open(file1)
     image2 = Image.open(file2)
     assert list(image1.getdata()) == list(image2.getdata())
