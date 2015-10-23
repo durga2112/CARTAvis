@@ -1,4 +1,5 @@
 import os
+import time
 import pytest
 import cartavis
 from flaky import flaky
@@ -604,6 +605,7 @@ def test_saveHistogramConsistency(cartavisInstance, cleanSlate, tempImageDir):
     i[0].loadFile(os.getcwd() + '/data/mexinputtest.fits')
     h[0].saveHistogram(file1, 200, 200, 'ignore')
     cartavisInstance.setCustomLayout(3,3)
+    time.sleep(2)
     h[0].saveHistogram(file2, 200, 200, 'ignore')
     image1 = Image.open(file1)
     image2 = Image.open(file2)
